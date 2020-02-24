@@ -9,6 +9,7 @@
 <body>
 
 	<h1> Lucky for Life Lottery!</h1>	
+	Calculate your winnings for a given Quick Pick! <br> <br> 
 	
 	<form name="input">
 	Input 5 Numbers <br>
@@ -24,14 +25,14 @@
 	
 	<div>
 	<div class="inline"> Lotto Numbers: </div>
-	<div id="lottonums" class="inline; numbers"> x x x x x</div>
+	<div id="lottonums" class="inline; numbers">- - - - -</div>
 	<div class="inline"> Lucky Ball: </div>
-	<div id="luckyball" class="inline; luckyball"> x</div> <br>
+	<div id="luckyball" class="inline; luckyball">-</div> <br>
 	
-	<div class="inline"> Test Numbers: </div>
-	<div id="yournums" class="inline; numbers"> x x x x x</div>
+	<div class="inline"> Your Numbers: </div>
+	<div id="yournums" class="inline; numbers">- - - - -</div>
 	<div class="inline"> Lucky Ball: </div>
-	<div id="yourlucky" class="inline; luckyball"> x</div> <br> <br>
+	<div id="yourlucky" class="inline; luckyball">-</div> <br> <br>
 	
 	<div class="inline"> Your Results:</div>
 	<div id="winnings" class="inline; numbers" style="width: 330px"></div> <br>
@@ -126,7 +127,7 @@
 		function calculateWinnings(){
 			if(counter == 0 && luckymatch == false){
 				document.getElementById("prize").innerHTML = "$0";
-			} else if( counter ==1 && luckymatch == true){
+			} else if( counter ==0 && luckymatch == true){
 				document.getElementById("prize").innerHTML = "$4";
 			} else if( counter == 1 && luckymatch == false){
 				document.getElementById("prize").innerHTML = "$0";
