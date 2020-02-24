@@ -1,0 +1,26 @@
+@charset "UTF-8";
+/* CSS Document */
+
+body {
+	font-family: futura;
+}
+
+button {
+
+}
+
+.inline {
+	display: inline-block;
+	margin-right: 20px;
+	width: 120px;
+}
+
+.numbers {
+	display: inline-block;
+	width: 140px;
+}
+
+.luckyball{
+	display: inline-block;
+	width: 20px;
+}

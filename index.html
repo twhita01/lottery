@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Lucky for Life! Lottery</title>
+<link rel="stylesheet" type="text/css" href="lotto.css">
+</head>
+
+<body>
+
+	<h1> Lucky for Life Lottery!</h1>	
+	
+	<form name="input">
+	Input 5 Numbers <br>
+	(1 - 48, separated by spaces) <br>
+		<input type="text" id="mylotto"> <br> <br>
+	
+	Lucky Ball Number <br>
+	(1 - 18) <br>
+		<input type="text" id="mylucky"> <br> <br>	
+	</form>
+	
+	<button id="roll"> I'm feeling lucky </button> <br> <br>
+	
+	<div>
+	<div class="inline"> Lotto Numbers: </div>
+	<div id="lottonums" class="inline; numbers"> x x x x x</div>
+	<div class="inline"> Lucky Ball: </div>
+	<div id="luckyball" class="inline; luckyball"> x</div> <br>
+	
+	<div class="inline"> Test Numbers: </div>
+	<div id="yournums" class="inline; numbers"> x x x x x</div>
+	<div class="inline"> Lucky Ball: </div>
+	<div id="yourlucky" class="inline; luckyball"> x</div> <br> <br>
+	
+	<div class="inline"> Your Results:</div>
+	<div id="winnings" class="inline; numbers" style="width: 330px"></div> <br>
+	<div class="inline"> Your Prize:</div>
+	<div id="prize" class="inline; numbers" style="width: 325px"> </div>
+	</div>	
+
+	
+	<script language="javascript">
+		
+		var lotto = [];
+		var testnums = new Array(6);
+		var counter = 0;
+		var luckymatch= false;
+		
+		document.getElementById("roll").onclick = function() {begin()};
+		
+		lottoRoll();
+		
+		function begin(){
+			splitContent();
+			compare();
+			calculateWinnings();
+		}
+		
+		
+		function lottoRoll(){
+			
+			document.getElementById("lottonums").innerHTML = ""
+				
+  			while(lotto.length < 5){
+      		var r = Math.floor(Math.random() * 48) + 1;
+				if(lotto.indexOf(r) === -1) lotto.push(r);
+  			}			
+			
+			lotto.sort(function(a, b){return a-b});
+			for(var i=0; i<5; i++){
+				document.getElementById("lottonums").innerHTML += lotto[i] + "&nbsp";
+			} 
+			lotto[5] = Math.floor(Math.random() * 18) + 1;
+			document.getElementById("luckyball").innerHTML = "";
+			document.getElementById("luckyball").innerHTML += lotto[5] + "&nbsp";
+		}
+		
+		function splitContent(){
+			var input = document.getElementById("mylotto").value;
+			var input2 = input.split(" ");
+			if(input2.length != 5){
+				alert("Please enter 5 numbers separated by spaces.")
+			} else {
+				document.getElementById("yournums").innerHTML = "";
+				for(var i = 0; i<5; i++){
+					input2[i] = parseInt(input2[i]);
+					document.getElementById("yournums").innerHTML += input2[i] + "&nbsp";
+					testnums[i] = input2[i];
+				}
+				lucky();
+			}
+		}
+		
+		function lucky(){
+			var luckynum = document.getElementById("mylucky").value;
+			luckynum = parseInt(luckynum);
+			document.getElementById("yourlucky").innerHTML = luckynum;
+			testnums[5] = luckynum;
+		}
+		
+		function compare(){
+			counter = 0;
+			luckymatch=false;
+			for(var i=0; i<5; i++){
+				for(var j=0; j<5; j++){
+					if(lotto[i] == testnums[j]){
+						counter++;
+					} else {
+						continue;
+					}	
+				}
+			}
+			
+			if(lotto[5] == testnums[5]){
+				luckymatch = true; 
+			}
+		document.getElementById("winnings").innerHTML = counter + " correct number(s)"
+			if( luckymatch == true){
+				document.getElementById("winnings").innerHTML += " and a Lucky Ball match.";
+			} else {
+				document.getElementById("winnings").innerHTML += " and no Lucky Ball match.";
+			}
+		}
+		
+		function calculateWinnings(){
+			if(counter == 0 && luckymatch == false){
+				document.getElementById("prize").innerHTML = "$0";
+			} else if( counter ==1 && luckymatch == true){
+				document.getElementById("prize").innerHTML = "$4";
+			} else if( counter == 1 && luckymatch == false){
+				document.getElementById("prize").innerHTML = "$0";
+			} else if( counter == 1 && luckymatch == true){
+				document.getElementById("prize").innerHTML = "$6";
+			} else if( counter == 2 && luckymatch == false){
+				document.getElementById("prize").innerHTML = "$3";
+			} else if( counter == 2 && luckymatch == true){
+				document.getElementById("prize").innerHTML = "$25";
+			} else if( counter == 3 && luckymatch == false){
+				document.getElementById("prize").innerHTML = "$20";
+			} else if( counter == 3 && luckymatch == true){
+				document.getElementById("prize").innerHTML = "$150";
+			} else if( counter == 4 && luckymatch == false){
+				document.getElementById("prize").innerHTML = "$200";
+			} else if( counter == 4 && luckymatch == true){
+				document.getElementById("prize").innerHTML = "$5,000";
+			} else if( counter == 5 && luckymatch == false){
+				document.getElementById("prize").innerHTML = "$25,000 / year for life!";
+			} else if( counter == 5 && luckymatch == true){
+				document.getElementById("prize").innerHTML = "$7,000 / week for life!";
+			}
+		}
+			
+		
+		
+	</script>
+
+
+</body>
+</html>
